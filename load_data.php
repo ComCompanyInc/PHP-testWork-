@@ -2,11 +2,11 @@
 require 'config.php';
 
 try {
-    // Изменяем строку подключения для PostgreSQL
+    // создаем подключение к бд (по тому файлику с конфигом, config.php)
     $pdo = new PDO("pgsql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Остальной код остается без изменений
+    // перебираем джсонку для пользователей
     $postsData = file_get_contents('https://jsonplaceholder.typicode.com/posts');
     $posts = json_decode($postsData, true);
 
@@ -18,7 +18,7 @@ try {
         $postCount++;
     }
 
-    // Аналогично для комментариев
+    // И аналогично для комментариев
     $commentsData = file_get_contents('https://jsonplaceholder.typicode.com/comments');
     $comments = json_decode($commentsData, true);
 
